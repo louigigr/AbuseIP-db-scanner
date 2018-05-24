@@ -8,8 +8,23 @@ import ipaddress
 import socket
 import time
 from sys import argv
+import os
 
-api_key = 'YOUR_API_KEY_HERE'
+if os.path.exists('my.api'):
+    if os.stat("my.api").st_size == 0:
+        print("The file my.api does not contain and key or data. Please paste your API key inside the my.api file for the program to work")
+        exit()
+    with open('my.api') as f:
+        first_line = f.readline()
+    api_key = first_line
+else:
+    print("No API file exists, creating...")
+    try:
+        open("my.api", 'x')
+    except FileExistsError:
+        pass
+    exit()
+
 
 parser = argparse.ArgumentParser(
     description='This program utilizes the Abuse IP Database from: AbuseIPDB.com to perform queries about IP addresses and returns the output to standard out.'
