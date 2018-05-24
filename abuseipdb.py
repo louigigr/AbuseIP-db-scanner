@@ -10,17 +10,19 @@ import time
 from sys import argv
 import os
 
-if os.path.exists('my.api'):
-	if os.stat("my.api").st_size == 0:
+scriptdir = os.path.dirname(os.path.realpath(__file__)) + "\\"
+
+if os.path.exists(scriptdir + 'my.api'):
+	if os.stat(scriptdir + "my.api").st_size == 0:
 		print("The file my.api does not contain and key or data. Please paste your API key inside the my.api file for the program to work")
 		sys.exit()
-	with open('my.api') as f:
+	with open(scriptdir + 'my.api') as f:
 		first_line = f.readline()
 	api_key = first_line
 else:
 	print("No API file exists, creating...")
 	try:
-		open("my.api", 'x')
+		open(scriptdir + "my.api", 'x')
 	except FileExistsError:
 		pass
 		
