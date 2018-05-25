@@ -2,16 +2,17 @@
 
 # AbuseIP DB Scanner
 
-This is a python script that will parse IP addresses from files and interact with AbuseIPDB API. It will return the information about the IP into standard out in tab separated values in standard out.
+This is a **python3** script that will parse IP addresses from any file containg IP addresses and return relevant threat information using the AbuseIPDB API.
 
 # New Releases
 
 Visit the [Releases](https://github.com/louigigr/AbuseIP-db-scanner/releases) page to download the [python version](https://github.com/louigigr/AbuseIP-db-scanner/releases/download/v1.0-beta.4/abuseipdb-all.zip) or the [windows binary version](https://github.com/louigigr/AbuseIP-db-scanner/releases/download/v1.0-beta.4/abuseipdb-win.zip) of the script.
 
-## Requirements (Setup)
+## Requirements (Setup) and Usage
 
+### Setup
 
-- Python3 (2.7 may have errors)
+- Python3 (_2.7 may have errors_)
 - Requests
 ```
 pip3 install Requests
@@ -20,13 +21,15 @@ pip3 install Requests
 ```
 pip3 install requests[security]
 ```
-- AbuseIP DB API Key
-In order to use the script you will need an API key and place it in the scrip under the "api_key" variable. API key information can be found here: (https://www.abuseipdb.com/api.html)
 
-## Usage
+### Usage:
+
+In order to use the script you will need an API key. The API key is stored in a file _my.api_ in the same directory as the script. In order for the script to work make sure you edit the file _my.api_ and enter you API Key. API key information can be found here: (https://www.abuseipdb.com/api.html)
+
+To use type:
 
 ```
-python3 AbuseIPDB.py -f file_to_parse.txt
+python3 abuseipdb.py -f file_to_parse.txt
 ```
 
  The options are as follows:
@@ -35,6 +38,33 @@ python3 AbuseIPDB.py -f file_to_parse.txt
 -t      outputs items in tab seperated values (Default)
 
 -c      outputs items in comma seperated values
+```
+
+
+## Setup and use with PIPENV
+
+### Setup PIPENV and AbuseIP-db-scanner
+
+* Requirements
+  * Python3
+  * Pipenv _(install with pip install pipenv)_
+  * Requests
+
+```
+cd ~
+git clone https://github.com/louigigr/AbuseIP-db-scanner.git
+cd AbuseIP-db-scanner
+pipenv install --python 3.6
+pipenv shell
+pipenv install requests
+```
+
+### Usage
+
+To use type:
+
+```
+python abuseipdb.py
 ```
 
 ## Troubleshooting
