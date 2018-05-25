@@ -4,6 +4,10 @@
 
 This is a python script that will parse IP addresses from files and interact with AbuseIPDB API. It will return the information about the IP into standard out in tab separated values in standard out.
 
+# New Releases
+
+Visit the [Releases](https://github.com/louigigr/AbuseIP-db-scanner/releases) page to download the [python version](https://github.com/louigigr/AbuseIP-db-scanner/releases/download/v1.0-beta.4/abuseipdb-all.zip) or the [windows binary version](https://github.com/louigigr/AbuseIP-db-scanner/releases/download/v1.0-beta.4/abuseipdb-win.zip) of the script.
+
 ## Requirements (Setup)
 
 
@@ -39,12 +43,4 @@ python3 AbuseIPDB.py -f file_to_parse.txt
 
 - If you have a unique issue, please create a new Issue, and include the output of your terminal from the bootstrap script down until the error.
 
-## Backlog
 
-- Parse for IPs recursively through directories
-- Create an option to output data in JSON
-- Create an option to output data to a file
-
-## Completed (After Launch)
-
-- ~~Create an option to output data in TSV or CSV~~
