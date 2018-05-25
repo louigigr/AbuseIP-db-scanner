@@ -12,7 +12,6 @@ from sys import argv
 import winreg
 
 REG_PATH = r"Software\QgSoft"
-scriptdir = os.path.dirname(os.path.realpath(__file__)) + "\\"
 
 def set_reg(name, value):
 	try:
