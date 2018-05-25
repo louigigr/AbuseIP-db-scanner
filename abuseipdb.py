@@ -1,4 +1,5 @@
 #! /bin/python/env
+import os
 import codecs
 import argparse
 import re
@@ -8,26 +9,37 @@ import ipaddress
 import socket
 import time
 from sys import argv
-import os
+import winreg
 
-scriptdir = os.path.dirname(os.path.realpath(__file__)) + "\\"
+REG_PATH = r"Software\QgSoft"
 
-if os.path.exists(scriptdir + 'my.api'):
-	if os.stat(scriptdir + "my.api").st_size == 0:
-		print("The file my.api does not contain and key or data. Please paste your API key inside the my.api file for the program to work")
-		sys.exit()
-	with open(scriptdir + 'my.api') as f:
-		first_line = f.readline()
-	api_key = first_line
-else:
-	print("No API file exists, creating...")
+def set_reg(name, value):
 	try:
-		open(scriptdir + "my.api", 'x')
-	except FileExistsError:
-		pass
-		
-	sys.exit()
+		winreg.CreateKey(winreg.HKEY_CURRENT_USER, REG_PATH)
+		registry_key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, REG_PATH, 0, 
+									   winreg.KEY_WRITE)
+		winreg.SetValueEx(registry_key, name, 0, winreg.REG_SZ, value)
+		winreg.CloseKey(registry_key)
+		return True
+	except WindowsError:
+		return False
 
+def get_reg(name):
+	try:
+		registry_key = winreg.OpenKey(winreg.HKEY_CURRENT_USER, REG_PATH, 0,
+									   winreg.KEY_READ)
+		value, regtype = winreg.QueryValueEx(registry_key, name)
+		winreg.CloseKey(registry_key)
+		return value
+	except WindowsError:
+		return None
+
+if not get_reg('apikey'):
+	apikey=input("Please enter your abuseipdb.com API key here: ")
+	set_reg('apikey', str(apikey))
+	print("API Key stored\n")
+	print("Reading from registry: " + str(get_reg('apikey')))
+api_key = str(get_reg('apikey'))
 
 parser = argparse.ArgumentParser(
 	formatter_class=argparse.RawDescriptionHelpFormatter,
@@ -39,13 +51,16 @@ required.add_argument(
 	"--file",
 	help="parses IP Addresses from a single given file",
 	action="store",
-	required=True)
+	required=False)
 
 
 parser.add_argument("-t", "--tsv", help="outputs items in tab seperated values (Default)", action="store_true")
 parser.add_argument("-c", "--csv", help="outputs items in comma seperated values",  action="store_true")
+parser.add_argument("-a", dest="APIKEY", help="stores new API key in registry",  action="store")
 
 args = parser.parse_args()
+
+
 
 def get_file(infile):
 	with codecs.open(infile, "r", encoding='utf-8', errors='ignore') as f:
@@ -142,6 +157,11 @@ def Deduplicate(duplicate):
 
 
 def main():
+	if args.APIKEY:
+		print("Reset API REQUEST")
+		set_reg('apikey', str(argv[2]))
+		print("\nYour key is: " + str(get_reg('apikey')))
+		sys.exit()
 	if args.file:
 		f = get_file(argv[2])
 		found = Deduplicate(re.findall(
