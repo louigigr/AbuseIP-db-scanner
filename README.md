@@ -2,7 +2,7 @@
 
 # AbuseIP DB Scanner
 
-This is a **python3** script that will parse IP addresses from any file containg IP addresses and return relevant threat information using the AbuseIPDB API.
+This is a **python3** script that will parse any text file containg IP addresses and return relevant threat information using the AbuseIPDB API.
 
 # New Releases
 
@@ -24,7 +24,7 @@ pip3 install requests[security]
 
 ### Usage:
 
-In order to use the script you will need an API key. The API key is stored in a file _my.api_ in the same directory as the script. In order for the script to work make sure you edit the file _my.api_ and enter you API Key. API key information can be found here: (https://www.abuseipdb.com/api.html)
+In order to use the script you will need an API key. The API key is stored in a file _my.api_ in the same directory as the script. In order for the script to work make sure you edit the file _my.api_ and enter your API Key. API key information can be found here: (https://www.abuseipdb.com/api.html)
 
 To use type:
 
