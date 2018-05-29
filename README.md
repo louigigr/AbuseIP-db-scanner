@@ -11,7 +11,8 @@ Visit the [Releases](https://github.com/louigigr/AbuseIP-db-scanner/releases) pa
 ## What's New!
 
 - Save API Key to a file
-- Retrieve Reports by specifying number of days (to be reviewed as a complete CLI solution may be better for automation)
+- Added -d or --days switch to keep generic script as a complete CLI solution which might be better for automation
+- Retrieve Reports by specifying number of days. If no number of days is specified the default value of _30_ is used
 
 ## Requirements (Setup) and Usage
 
