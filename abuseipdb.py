@@ -88,7 +88,11 @@ def get_cat(x):
 
 def get_report(IP):
 	# noofdays=input("Please enter number of days to look back in history for alerts: ")
-	noofdays=args.days
+	if not args.days:
+		print("Setting days to default: 30")
+		noofdays = 30
+	else:
+		noofdays=args.days
 	try:
 		val=int(noofdays)
 	except ValueError:
@@ -158,6 +162,7 @@ def Deduplicate(duplicate):
 
 
 def main():
+
 	if args.file:
 		f = get_file(args.file)
 		found = Deduplicate(re.findall(
