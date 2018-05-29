@@ -81,7 +81,16 @@ def get_cat(x):
 
 
 def get_report(IP):
-	request = 'https://www.abuseipdb.com/check/%s/json?key=%s' % (IP, api_key)
+	noofdays=input("Please enter number of days to look back in history for alerts: ")
+	try:
+		val=int(noofdays)
+	except ValueError:
+		print("\nYou must specify an integer between 1 and 365.\n")
+		sys.exit()
+	if (int(noofdays) <= int(0) or int(noofdays) > int(365)):
+		print("\nYou must specify an integer between 1 and 365.\n")
+		sys.exit()
+	request = 'https://www.abuseipdb.com/check/%s/json?key=%s&days=%s' % (IP, api_key, noofdays)
 	# DEBUG
 	# print(request)
 	r = requests.get(request)
