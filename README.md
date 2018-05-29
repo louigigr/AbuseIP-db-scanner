@@ -8,6 +8,11 @@ This is a **python3** script that will parse any text file containg IP addresses
 
 Visit the [Releases](https://github.com/louigigr/AbuseIP-db-scanner/releases) page to download the [python version](https://github.com/louigigr/AbuseIP-db-scanner/releases/download/v1.0-beta.4/abuseipdb-all.zip) or the [windows binary version](https://github.com/louigigr/AbuseIP-db-scanner/releases/download/v1.0-beta.4/abuseipdb-win.zip) of the script.
 
+## What's New!
+
+- Save API Key to a file
+- Retrieve Reports by specifying number of days (to be reviewed as a complete CLI solution may be better for automation)
+
 ## Requirements (Setup) and Usage
 
 ### Setup
@@ -39,6 +44,7 @@ python3 abuseipdb.py -f file_to_parse.txt
 
 -c      outputs items in comma seperated values
 ```
+_Specify the number of days you wish to search and display alerts for. Accepted range is **1 to 365**._
 
 
 ## Setup and use with PIPENV
@@ -67,10 +73,6 @@ To use type:
 python abuseipdb.py
 ```
 
-## Troubleshooting
-
-- If you are receiving errors, please look at the Issues queue and see if there is already an issue open.
-
-- If you have a unique issue, please create a new Issue, and include the output of your terminal from the bootstrap script down until the error.
+_Specify the number of days you wish to search and display alerts for. Accepted range is **1 to 365**._
 
 

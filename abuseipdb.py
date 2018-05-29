@@ -10,25 +10,6 @@ import time
 from sys import argv
 import os
 
-scriptdir = os.path.dirname(os.path.realpath(__file__)) + "\\"
-
-if os.path.exists(scriptdir + 'my.api'):
-	if os.stat(scriptdir + "my.api").st_size == 0:
-		print("The file my.api does not contain and key or data. Please paste your API key inside the my.api file for the program to work")
-		sys.exit()
-	with open(scriptdir + 'my.api') as f:
-		first_line = f.readline()
-	api_key = first_line
-else:
-	print("No API file exists, creating...")
-	try:
-		open(scriptdir + "my.api", 'x')
-	except FileExistsError:
-		pass
-		
-	sys.exit()
-
-
 parser = argparse.ArgumentParser(
 	formatter_class=argparse.RawDescriptionHelpFormatter,
 	description='AbuseIPDB query system by Quadrant Global Limited.\n\nPart of the Quadrant Global Security Toolset.\n\nThis program uses the AbuseIPDB.com API in order to perform queries and detect malicious IP addresses.\nThe input can be any text file in any form, the IP addresses are parsed and recognised automaticaly.'
@@ -40,12 +21,23 @@ required.add_argument(
 	help="parses IP Addresses from a single given file",
 	action="store",
 	required=True)
+required.add_argument(
+	"-d",
+	"--days",
+	help="Number of days to look back in history for alerts",
+	action="store",
+	required=False)
 
 
 parser.add_argument("-t", "--tsv", help="outputs items in tab seperated values (Default)", action="store_true")
 parser.add_argument("-c", "--csv", help="outputs items in comma seperated values",  action="store_true")
 
 args = parser.parse_args()
+
+def createfile(filename,key):
+	f=open(filename, "w+")
+	f.write(key)
+	f.close()
 
 def get_file(infile):
 	with codecs.open(infile, "r", encoding='utf-8', errors='ignore') as f:
@@ -81,7 +73,21 @@ def get_cat(x):
 
 
 def get_report(IP):
-	request = 'https://www.abuseipdb.com/check/%s/json?key=%s' % (IP, api_key)
+	# noofdays=input("Please enter number of days to look back in history for alerts: ")
+	if not args.days:
+		print("Setting days to default: 30")
+		noofdays = 30
+	else:
+		noofdays=args.days
+	try:
+		val=int(noofdays)
+	except ValueError:
+		print("\nYou must specify an integer between 1 and 365.\n")
+		sys.exit()
+	if (int(noofdays) <= int(0) or int(noofdays) > int(365)):
+		print("\nYou must specify an integer between 1 and 365.\n")
+		sys.exit()
+	request = 'https://www.abuseipdb.com/check/%s/json?key=%s&days=%s' % (IP, api_key, noofdays)
 	# DEBUG
 	# print(request)
 	r = requests.get(request)
@@ -142,8 +148,9 @@ def Deduplicate(duplicate):
 
 
 def main():
+
 	if args.file:
-		f = get_file(argv[2])
+		f = get_file(args.file)
 		found = Deduplicate(re.findall(
 			r'(?:[\d]{1,3})\.(?:[\d]{1,3})\.(?:[\d]{1,3})\.(?:[\d]{1,3})', f))
 
@@ -166,4 +173,25 @@ def main():
 
 
 if __name__ == '__main__':
+	scriptdir = os.path.dirname(os.path.realpath(__file__)) + "\\"
+	scriptfile=scriptdir + "my.api"
+	if os.path.exists(scriptfile):
+
+		if os.stat(scriptfile).st_size == 0:
+			myapi = input("The file my.api does not contain and key or data. Please enter your API key now: ")
+			createfile(scriptfile, str(myapi))
+			sys.exit()
+		with open(scriptfile) as f:
+			first_line = f.readline()
+		api_key = first_line
+	else:
+		print("No API file exists, creating...")
+		try:
+			# open(scriptdir + "my.api", 'x')
+			myapi = input("The file my.api does not contain and key or data. Please enter your API key now: ")
+			createfile(scriptfile,str(myapi))
+		except FileExistsError:
+			pass
+			
+		sys.exit()
 	main()
