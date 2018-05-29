@@ -28,6 +28,9 @@ e.g. ``` abuseipdb -f alert.log ```
 
 > Optional: To save to a file you can apend > {filename} after the command e.g ``` abuseipdb -f alert.log > ThreatReport.txt ```
 
+- Specify the number of days you wish to search and display alerts for.
+  - Accepted range is 1 to 365
+  - Contains a really simple failsafe so the script won't break, really helps with the binary version
 - To get help type abuseipdb -h
 
 ## Setup and Usage with python
