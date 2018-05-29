@@ -40,6 +40,12 @@ required.add_argument(
 	help="parses IP Addresses from a single given file",
 	action="store",
 	required=True)
+required.add_argument(
+	"-d",
+	"--days",
+	help="Number of days to look back in history for alerts",
+	action="store",
+	required=False)
 
 
 parser.add_argument("-t", "--tsv", help="outputs items in tab seperated values (Default)", action="store_true")
@@ -81,7 +87,8 @@ def get_cat(x):
 
 
 def get_report(IP):
-	noofdays=input("Please enter number of days to look back in history for alerts: ")
+	# noofdays=input("Please enter number of days to look back in history for alerts: ")
+	noofdays=args.days
 	try:
 		val=int(noofdays)
 	except ValueError:
@@ -152,7 +159,7 @@ def Deduplicate(duplicate):
 
 def main():
 	if args.file:
-		f = get_file(argv[2])
+		f = get_file(args.file)
 		found = Deduplicate(re.findall(
 			r'(?:[\d]{1,3})\.(?:[\d]{1,3})\.(?:[\d]{1,3})\.(?:[\d]{1,3})', f))
 
