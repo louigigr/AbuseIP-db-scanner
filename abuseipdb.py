@@ -39,11 +39,13 @@ if not get_reg('apikey'):
 	set_reg('apikey', str(apikey))
 	print("API Key stored\n")
 	print("Reading from registry: " + str(get_reg('apikey')))
+else:
+	print("API Key found stored in registry.\nUsing API KEY: " + str(get_reg('apikey')) + "\n")
 api_key = str(get_reg('apikey'))
 
 parser = argparse.ArgumentParser(
 	formatter_class=argparse.RawDescriptionHelpFormatter,
-	description='AbuseIPDB query system by Quadrant Global Limited.\n\nPart of the Quadrant Global Security Toolset.\n\nThis program uses the AbuseIPDB.com API in order to perform queries and detect malicious IP addresses.\nThe input can be any text file in any form, the IP addresses are parsed and recognised automaticaly.'
+	description='Part of the Quadrant Global Security Toolset.\n\nThis program uses the AbuseIPDB.com API in order to perform queries and detect malicious IP addresses.\nThe input can be any text file in any form, the IP addresses are parsed and recognised automaticaly.\n'
 )
 required = parser.add_argument_group('required arguments')
 required.add_argument(
@@ -52,11 +54,18 @@ required.add_argument(
 	help="parses IP Addresses from a single given file",
 	action="store",
 	required=False)
+# required.add_argument(
+	# "-d",
+	# "--days",
+	# help="Number of days to look back in history for alerts",
+	# action="store",
+	# required=False)
 
 
 parser.add_argument("-t", "--tsv", help="outputs items in tab seperated values (Default)", action="store_true")
 parser.add_argument("-c", "--csv", help="outputs items in comma seperated values",  action="store_true")
 parser.add_argument("-a", dest="APIKEY", help="stores new API key in registry",  action="store")
+# parser.add_argument("-d", dest="DAYS", help="Number of days to look back in history for alerts",  action="store")
 
 args = parser.parse_args()
 
@@ -96,12 +105,22 @@ def get_cat(x):
 
 
 def get_report(IP):
-	request = 'https://www.abuseipdb.com/check/%s/json?key=%s' % (IP, api_key)
+	noofdays=input("Please enter number of days to look back in history for alerts: ")
+	try:
+		val=int(noofdays)
+	except ValueError:
+		print("\nYou must specify an integer between 1 and 365.\n")
+		sys.exit()
+	if (int(noofdays) <= int(0) or int(noofdays) > int(365)):
+		print("\nYou must specify an integer between 1 and 365.\n")
+		sys.exit()
+	#request = 'https://www.abuseipdb.com/check/%s/json?key=%s&days=%s' % (IP, api_key, str(argv[4]))
+	request = 'https://www.abuseipdb.com/check/%s/json?key=%s&days=%s' % (IP, api_key, noofdays)
 	# DEBUG
-	# print(request)
+	#print(request)
 	r = requests.get(request)
 	# DEBUG
-	# print(r.json())
+	#print(r.json())
 	try:
 		data = r.json()
 		if data == []:
@@ -157,6 +176,11 @@ def Deduplicate(duplicate):
 
 
 def main():
+
+	# if not args.days:
+		# print("You must specify number of days for the report to run\nE.g: abuseipdb -f myfile.txt -d 365")
+		# sys.exit()
+
 	if args.APIKEY:
 		print("Reset API REQUEST")
 		set_reg('apikey', str(argv[2]))
