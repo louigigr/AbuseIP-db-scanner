@@ -6,7 +6,7 @@ This is a **python3** script that will parse any text file containg IP addresses
 
 # New Releases
 
-Visit the [Releases](https://github.com/louigigr/AbuseIP-db-scanner/releases) page to download the [python version](https://github.com/louigigr/AbuseIP-db-scanner/releases/download/v1.0-stable/abuseipdb-generic.zip) or the [windows binary version](https://github.com/louigigr/AbuseIP-db-scanner/releases/download/v1.0-stable/abuseipdb-win-v1.0.zip) of the script.
+Visit the **[Latest Releases](https://github.com/louigigr/AbuseIP-db-scanner/releases/latest)** page to download the [python version](https://github.com/louigigr/AbuseIP-db-scanner/releases/download/v1.0-stable/abuseipdb-generic.zip) or the [windows binary version](https://github.com/louigigr/AbuseIP-db-scanner/releases/download/v1.0-stable/abuseipdb-win-v1.0.zip) of the script.
 
 ## Download and use binary
 
