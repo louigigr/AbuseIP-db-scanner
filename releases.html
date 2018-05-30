@@ -1,0 +1,58 @@
+<h2 id="releasev10">Release v1.0</h2>
+
+<p>First stable release of AbuseIP-db-scanner </p>
+
+<blockquote>
+  <p>Windows binaries and Python3 version available</p>
+</blockquote>
+
+<h2 id="download">Download</h2>
+
+<blockquote>
+  <p><a href="https://github.com/louigigr/AbuseIP-db-scanner/releases/download/v1.0-stable/abuseipdb-generic.zip">Python version</a></p>
+
+  <p><a href="https://github.com/louigigr/AbuseIP-db-scanner/releases/download/v1.0-stable/abuseipdb-win-v1.0.zip">Windows binary version</a></p>
+</blockquote>
+
+<p><em>You can also visit the <a href="https://github.com/louigigr/AbuseIP-db-scanner/releases">Repository Releases page </a></em></p>
+
+<p><strong><em>The windows binary should work fine in Windows 10. In any other case you may need to download <a href="https://www.microsoft.com/en-us/download/details.aspx?id=48234">Windows 10 Universal C Runtime</a></em></strong></p>
+
+<h2 id="whatsnew">What's New!</h2>
+
+<ul>
+<li>Save API Key to a file</li>
+
+<li>Added -d or --days switch to keep generic script as a complete CLI solution which might be better for automation</li>
+
+<li>Retrieve Reports by specifying number of days. If no number of days is specified the default value of <em>30</em> is used</li>
+</ul>
+
+<h3 id="features">Features</h3>
+
+<ul>
+<li>Registry API key Storage (Windows only)</li>
+
+<li>Input Key on first run</li>
+
+<li>Store API Key to file (python version)</li>
+
+<li>Export to CSV</li>
+
+<li>Export to Tab Seperated Values</li>
+
+<li>IP parser that will automatically:
+
+
+<ul>
+<li>Grab all IP addresses in the file no matter the formatting</li>
+
+<li>Detect and remove duplicate IP addresses</li>
+
+<li>Detect and remove local subnet IP addresses <em>(192.168.0.0/16, 172.16.0.0/12, 10.0.0.0/8)</em></li></ul>
+</li>
+</ul>
+
+<h2 id="genericrelease">Generic Release</h2>
+
+<p>The generic release uses the file method to store your API key.</p>
