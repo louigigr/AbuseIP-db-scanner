@@ -28,8 +28,11 @@ e.g. ``` abuseipdb -f alert.log ```
 
 > Optional: To save to a file you can apend > {filename} after the command e.g ``` abuseipdb -f alert.log > ThreatReport.txt ```
 
-- Specify the number of days you wish to search and display alerts for.
+- Specify the number of days you wish to search and display alerts for by using the -d or --days switch.
+e.g. ``` abuseipdb -f myip.txt -d 60 ```
+
   - Accepted range is 1 to 365
+  - If no switch is specified the script uses a default value of _30_
   - Contains a really simple failsafe so the script won't break, really helps with the binary version
 - To get help type abuseipdb -h
 
@@ -63,6 +66,8 @@ python3 abuseipdb.py -f file_to_parse.txt
 -t      outputs items in tab seperated values (Default)
 
 -c      outputs items in comma seperated values
+
+-d      specifies number of days
 ```
 
 
