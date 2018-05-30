@@ -6,11 +6,11 @@ This is a **python3** script that will parse any text file containg IP addresses
 
 # New Releases
 
-Visit the [Releases](https://github.com/louigigr/AbuseIP-db-scanner/releases) page to download the [python version](https://github.com/louigigr/AbuseIP-db-scanner/releases/download/v1.0-beta.4/abuseipdb-all.zip) or the [windows binary version](https://github.com/louigigr/AbuseIP-db-scanner/releases/download/v1.0-beta.4/abuseipdb-win.zip) of the script.
+Visit the [Releases](https://github.com/louigigr/AbuseIP-db-scanner/releases) page to download the [python version](https://github.com/louigigr/AbuseIP-db-scanner/releases/download/v1.0-stable/abuseipdb-generic.zip) or the [windows binary version](https://github.com/louigigr/AbuseIP-db-scanner/releases/download/v1.0-stable/abuseipdb-win-v1.0.zip) of the script.
 
 ## Download and use binary
 
-- Download the [windows binary](https://github.com/louigigr/AbuseIP-db-scanner/releases/download/v1.0-beta.4/abuseipdb-win.zip) from the [releases](https://github.com/louigigr/AbuseIP-db-scanner/releases) page
+- Download the [windows binary](https://github.com/louigigr/AbuseIP-db-scanner/releases/download/v1.0-stable/abuseipdb-win-v1.0.zip) from the [releases](https://github.com/louigigr/AbuseIP-db-scanner/releases) page
 
 >![alt text](https://cdn.els-cdn.com/sd/img/sprite_parts/warning_a.gif "Important!") **Important! The binary should work fine on Windows 10, in any other case you need to download  [Windows 10 Universal C Runtime](https://www.microsoft.com/en-us/download/details.aspx?id=48234)**![alt text](https://cdn.els-cdn.com/sd/img/sprite_parts/warning_a.gif "Important!")
 
