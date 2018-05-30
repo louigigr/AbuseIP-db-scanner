@@ -54,18 +54,18 @@ required.add_argument(
 	help="parses IP Addresses from a single given file",
 	action="store",
 	required=False)
-# required.add_argument(
-	# "-d",
-	# "--days",
-	# help="Number of days to look back in history for alerts",
-	# action="store",
-	# required=False)
+required.add_argument(
+	"-d",
+	"--days",
+	help="Number of days to look back in history for alerts",
+	action="store",
+	required=False)
 
 
 parser.add_argument("-t", "--tsv", help="outputs items in tab seperated values (Default)", action="store_true")
 parser.add_argument("-c", "--csv", help="outputs items in comma seperated values",  action="store_true")
 parser.add_argument("-a", dest="APIKEY", help="stores new API key in registry",  action="store")
-# parser.add_argument("-d", dest="DAYS", help="Number of days to look back in history for alerts",  action="store")
+#parser.add_argument("-d", dest="DAYS", help="Number of days to look back in history for alerts",  action="store")
 
 args = parser.parse_args()
 
@@ -105,7 +105,11 @@ def get_cat(x):
 
 
 def get_report(IP):
-	noofdays=input("Please enter number of days to look back in history for alerts: ")
+	if not args.days:
+		print("Setting days to default: 30")
+		noofdays = 30
+	else:
+		noofdays=args.days
 	try:
 		val=int(noofdays)
 	except ValueError:
@@ -114,6 +118,7 @@ def get_report(IP):
 	if (int(noofdays) <= int(0) or int(noofdays) > int(365)):
 		print("\nYou must specify an integer between 1 and 365.\n")
 		sys.exit()
+
 	#request = 'https://www.abuseipdb.com/check/%s/json?key=%s&days=%s' % (IP, api_key, str(argv[4]))
 	request = 'https://www.abuseipdb.com/check/%s/json?key=%s&days=%s' % (IP, api_key, noofdays)
 	# DEBUG
