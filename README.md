@@ -2,6 +2,8 @@
 
 # AbuseIP DB Scanner
 
+!!!!!----NO LONGER WORKS - API HAS CHANGED----!!!!!
+
 This is a **python3** script that will parse any text file containg IP addresses and return relevant threat information using the AbuseIPDB API.
 
 # New Releases
